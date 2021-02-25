@@ -7,7 +7,14 @@ palya.bgcolor("green")
 palya.title("Snake")
 palya.tracer(0)
 
+fej =turtle.Turtle()
+fej.shape("triangle")
+fej.penup()
+fej.color("yellow")
+
 while True:
+    fej.forward(20)
+
     palya.update()
     time.sleep(0.3)
 
