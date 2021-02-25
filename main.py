@@ -10,8 +10,13 @@ def balra():
     fej.left(90)
 
 
-# def fel():
-#     fej
+def die():
+    kijelzo = turtle.Turtle()
+    kijelzo.hideturtle()
+    kijelzo.color("white")
+    kijelzo.goto(-30, 240)
+    kijelzo.clear()
+    kijelzo.write("Meghaltál!", font=("Arial", 35, "bold"), align="center")
 
 
 palya = turtle.Screen()
@@ -22,8 +27,6 @@ palya.tracer(0)
 palya.listen()
 palya.onkey(jobbra, "Right")
 palya.onkey(balra, "Left")
-# palya.onkey(fel, "Up")
-# palya.onkey(le, "Down")
 
 fej = turtle.Turtle()
 fej.shape("triangle")
@@ -32,6 +35,9 @@ fej.color("yellow")
 
 while True:
     fej.forward(20)
+
+    if fej.xcor() < -400 or fej.xcor() > 400 or fej.ycor() < -300 or fej.ycor() > 300:
+        die()
 
     palya.update()
     time.sleep(0.3)
