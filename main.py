@@ -36,7 +36,7 @@ fej.color("yellow")
 while True:
     fej.forward(20)
 
-    if fej.xcor() < -400 or fej.xcor() > 400 or fej.ycor() < -300 or fej.ycor() > 300:
+    if abs(fej.xcor()) > 400 or abs(fej.ycor()) > 300:
         die()
 
     palya.update()
