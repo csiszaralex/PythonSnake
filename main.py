@@ -1,5 +1,10 @@
 import turtle
 import time
+from random import randint
+
+height = 600
+width = 800
+pont = 0
 
 
 def jobbra():
@@ -11,6 +16,8 @@ def balra():
 
 
 def die():
+    pontszam.clear()
+
     kijelzo = turtle.Turtle()
     kijelzo.hideturtle()
     kijelzo.color("white")
@@ -19,8 +26,19 @@ def die():
     kijelzo.write("Meghaltál!", font=("Arial", 35, "bold"), align="center")
 
 
+def gyumolcs_kirak():
+    x = randint(-380, 380)
+    y = randint(-280, 280)
+    gyumolcs.goto(x, y)
+
+
+def kiir():
+    pontszam.clear()
+    pontszam.write(f"{pont} pont", font=("Arial", 35, "bold"), align="center")
+
+
 palya = turtle.Screen()
-palya.setup(width=800, height=600)
+palya.setup(width=width, height=height)
 palya.bgcolor("green")
 palya.title("Snake")
 palya.tracer(0)
@@ -33,11 +51,25 @@ fej.shape("triangle")
 fej.penup()
 fej.color("yellow")
 
+gyumolcs = turtle.Turtle()
+gyumolcs.penup()
+gyumolcs.shape('circle')
+gyumolcs.color('red')
+gyumolcs_kirak()
+
+pontszam = turtle.Turtle()
+pontszam.hideturtle()
+pontszam.color("white")
+pontszam.goto(-30, 240)
+pontszam.clear()
+
 while True:
     fej.forward(20)
-
-    if abs(fej.xcor()) > 400 or abs(fej.ycor()) > 300:
+    if fej.distance(gyumolcs.xcor(), gyumolcs.ycor()) < 20:
+        pont += 1
+        kiir()
+        gyumolcs_kirak()
+    if abs(fej.xcor()) > width/2 or abs(fej.ycor()) > height/2:
         die()
-
     palya.update()
     time.sleep(0.3)
