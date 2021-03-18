@@ -17,13 +17,13 @@ def balra():
 
 def die():
     pontszam.clear()
-
     kijelzo = turtle.Turtle()
     kijelzo.hideturtle()
     kijelzo.color("white")
     kijelzo.goto(-30, 240)
     kijelzo.clear()
     kijelzo.write("Meghaltál!", font=("Arial", 35, "bold"), align="center")
+    turtle.done()
 
 
 def gyumolcs_kirak():
@@ -35,6 +35,16 @@ def gyumolcs_kirak():
 def kiir():
     pontszam.clear()
     pontszam.write(f"{pont} pont", font=("Arial", 35, "bold"), align="center")
+
+
+def ujTest(x, y):
+    time.sleep(0.2)
+    uj = turtle.Turtle()
+    uj.shape("circle")
+    uj.penup()
+    uj.color("yellow")
+    uj.goto(x, y)
+    test.append(uj)
 
 
 palya = turtle.Screen()
@@ -63,13 +73,30 @@ pontszam.color("white")
 pontszam.goto(-30, 240)
 pontszam.clear()
 
+test = []
+ujTest(fej.xcor(), fej.ycor())
+ujTest(fej.xcor(), fej.ycor())
+ujTest(fej.xcor(), fej.ycor())
+ujTest(fej.xcor(), fej.ycor())
+ujTest(fej.xcor(), fej.ycor())
+ujTest(fej.xcor(), fej.ycor())
+ujTest(fej.xcor(), fej.ycor())
+
 while True:
+    fejX = fej.xcor()
+    fejY = fej.ycor()
     fej.forward(20)
+    test[-1].goto(fejX, fejY)
+    test = [test[-1]] + test[:-1]
     if fej.distance(gyumolcs.xcor(), gyumolcs.ycor()) < 20:
         pont += 1
+        ujTest(fejX, fejY)
         kiir()
         gyumolcs_kirak()
     if abs(fej.xcor()) > width/2 or abs(fej.ycor()) > height/2:
         die()
     palya.update()
+    for t in test:
+        if(fej.distance(t.xcor(), t.ycor()) < 15):
+            die()
     time.sleep(0.3)
